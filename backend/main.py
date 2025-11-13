@@ -46,12 +46,17 @@ async def predict(file: UploadFile = File(...)):
 
     # Predict
     preds = model.predict(processed_img)
-    decoded = decode_predictions(preds, top=1)[0][0]
+    # d=decode_predictions(preds, top=1)
+    decoded = decode_predictions(preds, top=5)[0]
 
-    label = decoded[1]        # class name
-    confidence = float(decoded[2])  # probability
+    # Format output
+    results = []
+    for (imagenet_id, label, score) in decoded:
+        results.append({
+            "label": label,
+            "confidence": float(score)
+        })
 
     return {
-        "prediction": label,
-        "confidence": confidence
+        "predictions": results
     }
