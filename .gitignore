@@ -1,3 +1,9 @@
-node_modules
+# Python backend
+__pycache__/
+*.pyc
 
-    
+# Next.js frontend
+frontend/node_modules
+frontend/.next
+frontend/out
+frontend/.env.local
